@@ -11,7 +11,7 @@ const JC = () => {
   const [wallet, setWallet] = useState(null);
 
   return (
-    <div style={{ padding: 20 }}>
+    <div style={{ padding: 20, paddingTop: 96 }}>
       <h1>Decentralized Aid Disbursement MVP</h1>
       <WalletCreator onWalletCreated={setWallet} />
       <hr />
