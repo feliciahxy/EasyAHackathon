@@ -5,6 +5,7 @@ import CreateWallet from './pages/CreateWallet';
 import CheckBalance from "./pages/CheckBalance.jsx";
 import Escrow from "./pages/Escrow.jsx";
 import OrganisationList from "./pages/OrganisationList.jsx";
+import JC from "./pages/JC.jsx";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/check-balance' element={<CheckBalance />} />
           <Route path='/escrow' element={<Escrow />} />
           <Route path='/organisations' element={<OrganisationList />} />
+          <Route path='/jc' element={<JC />} />
           {/* Add more routes as needed */}
         </Routes>
       </Router>
