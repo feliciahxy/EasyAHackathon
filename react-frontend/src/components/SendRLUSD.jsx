@@ -36,35 +36,41 @@ export default function SendRLUSD() {
     };
   
     return (
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Recipient Address:
-            <input
-              type="text"
-              value={recipient}
-              onChange={(e) => setRecipient(e.target.value)}
-              required
-              placeholder="r..."
-            />
-          </label>
-          <br />
-          <label>
-            Amount (RLUSD):
-            <input
-              type="number"
-              min="0"
-              step="0.000001"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              required
-            />
-          </label>
-          <br />
-          <button type="submit">Send</button>
-        </form>
-        {status && <p>{status}</p>}
+      <div className="flex items-center justify-center w-screen">
+        <div className="card w-96 bg-base-100 card-xl shadow-lg">
+          <div className="card-body">
+            <h2 className="card-title">XRP & RLUSD Balance Checker</h2>
+            <form onSubmit={handleSubmit}>
+              <label>
+                Recipient Address:
+                <input
+                  type="text"
+                  value={recipient}
+                  onChange={(e) => setRecipient(e.target.value)}
+                  required
+                  placeholder="r..."
+                />
+              </label>
+              <br />
+              <label>
+                Amount (RLUSD):
+                <input
+                  type="number"
+                  min="0"
+                  step="0.000001"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  required
+                />
+              </label>
+              <br />
+              <button type="submit">Send</button>
+            </form>
+            {status && <p>{status}</p>}
+          </div>
+        </div>
       </div>
+
     );
   }
   

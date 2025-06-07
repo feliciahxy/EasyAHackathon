@@ -7,6 +7,7 @@ import Escrow from "./pages/Escrow.jsx";
 import OrganisationList from "./pages/OrganisationList.jsx";
 import CreateTrustline from "./pages/CreateTrustline.jsx";
 import FundWallet from "./components/FundWallet.jsx";
+import TransferMoney from "./pages/TransferMoney.jsx";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/organisations' element={<OrganisationList />} />
           <Route path='/create-trustline' element={<CreateTrustline />} />
           <Route path='/fund-wallet' element={<FundWallet />} />
+          <Route path='/transfer-money' element={<TransferMoney />} />
           {/* Add more routes as needed */}
         </Routes>
       </Router>
