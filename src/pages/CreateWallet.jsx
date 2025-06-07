@@ -1,45 +1,48 @@
-const CreateWallet = () => {
-    const [walletName, setWalletName] = useState('');
-    const [walletPassword, setWalletPassword] = useState('');
-    const [error, setError] = useState('');
-    
-    const handleCreateWallet = async () => {
-        if (!walletName || !walletPassword) {
-        setError('Please fill in all fields');
-        return;
-        }
-    
-        try {
-        // Simulate wallet creation logic
-        console.log(`Creating wallet: ${walletName} with password: ${walletPassword}`);
-        // Reset fields after creation
-        setWalletName('');
-        setWalletPassword('');
-        setError('');
-        } catch (err) {
-        setError('Failed to create wallet');
-        }
-    };
-    
-    return (
-        <div>
-        <h1>Create Wallet (Boilerplate)</h1>
-        <input
-            type="text"
-            placeholder="Wallet Name"
-            value={walletName}
-            onChange={(e) => setWalletName(e.target.value)}
-        />
-        <input
-            type="password"
-            placeholder="Wallet Password"
-            value={walletPassword}
-            onChange={(e) => setWalletPassword(e.target.value)}
-        />
-        <button onClick={handleCreateWallet}>Create Wallet</button>
-        {error && <p className="error">{error}</p>}
+import React, { useState } from 'react';
+
+function CreateWallet() {
+  const [wallet, setWallet] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleCreateWallet = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch('http://localhost:3001/api/wallet', {
+        method: 'POST',
+      });
+      const data = await res.json();
+      setWallet(data);
+    } catch (error) {
+      console.error('Error creating wallet:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div style={{ padding: '1rem', border: '1px solid #ccc', borderRadius: '8px', maxWidth: '500px' }}>
+      <h2>Create XRPL Wallet</h2>
+      <button onClick={handleCreateWallet} disabled={loading}>
+        {loading ? 'Creating Wallet...' : 'Create Wallet'}
+      </button>
+
+      {wallet && (
+        <div style={{ marginTop: '1.5rem' }}>
+          <p><strong>Wallet Address:</strong></p>
+          <code>{wallet.address}</code>
+
+          <p><strong>Wallet Secret (Seed):</strong></p>
+          <code>{wallet.seed}</code>
+
+          <p><strong>Funded Balance:</strong> {wallet.balance} XRP</p>
+
+          <div style={{ marginTop: '0.5rem', color: 'red' }}>
+            ⚠️ Do not share your wallet seed with anyone.
+          </div>
         </div>
-    );
+      )}
+    </div>
+  );
 }
 
 export default CreateWallet;
