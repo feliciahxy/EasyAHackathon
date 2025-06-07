@@ -15,8 +15,8 @@ const Navbar = () => {
                 <div className="dropdown" onClick={handleClick}>
                     <img tabIndex={0} role="button" src={toggle ? menu : close} alt='menu' className='w-[30px] h-[30px]'/>
                     <ul className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
+                        <li><a><Link to="/create-wallet">Create Wallet</Link></a></li>
+                        <li><a><Link to="/escrow">Send Currency</Link></a></li>
                     </ul>
                 </div>
             </div>
