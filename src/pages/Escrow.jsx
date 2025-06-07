@@ -27,8 +27,8 @@ function Escrow() {
   };
 
   return (
-    <div style={{ padding: '1rem' }}>
-      <h2>Send RLUSD to Escrow</h2>
+    <div className="w-screen" style={{ padding: '1rem' }}>
+      <h2 className="justify-center">Send RLUSD to Escrow</h2>
 
       <label>Destination Address:</label>
       <input

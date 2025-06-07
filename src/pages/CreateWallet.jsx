@@ -20,27 +20,32 @@ function CreateWallet() {
   };
 
   return (
-    <div style={{ padding: '1rem', border: '1px solid #ccc', borderRadius: '8px', maxWidth: '500px' }}>
-      <h2>Create XRPL Wallet</h2>
-      <button onClick={handleCreateWallet} disabled={loading}>
-        {loading ? 'Creating Wallet...' : 'Create Wallet'}
-      </button>
+    <div className="flex items-center justify-center w-screen">
+      <div className="card w-96 bg-base-100 card-xl shadow-lg">
+        <div className="card-body">
+          <h2 className="card-title">Create XRPL Wallet</h2>
+          <p>Placeholder Subtext</p>
+          <button onClick={handleCreateWallet} disabled={loading}>
+            {loading ? 'Creating Wallet...' : 'Create Wallet'}
+          </button>
 
-      {wallet && (
-        <div style={{ marginTop: '1.5rem' }}>
-          <p><strong>Wallet Address:</strong></p>
-          <code>{wallet.address}</code>
+          {wallet && (
+            <div style={{ marginTop: '1.5rem' }}>
+              <p><strong>Wallet Address:</strong></p>
+              <code>{wallet.address}</code>
 
-          <p><strong>Wallet Secret (Seed):</strong></p>
-          <code>{wallet.seed}</code>
+              <p><strong>Wallet Secret (Seed):</strong></p>
+              <code>{wallet.seed}</code>
 
-          <p><strong>Funded Balance:</strong> {wallet.balance} XRP</p>
+              <p><strong>Funded Balance:</strong> {wallet.balance} XRP</p>
 
-          <div style={{ marginTop: '0.5rem', color: 'red' }}>
-            ⚠️ Do not share your wallet seed with anyone.
-          </div>
+              <div style={{ marginTop: '0.5rem', color: 'red' }}>
+                ⚠️ Do not share your wallet seed with anyone.
+              </div>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
