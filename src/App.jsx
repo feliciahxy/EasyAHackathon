@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import CreateWallet from './pages/CreateWallet';
 import CheckBalance from "./pages/CheckBalance.jsx";
 import Escrow from "./pages/Escrow.jsx";
+import OrganisationList from "./pages/OrganisationList.jsx";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='/create-wallet' element={<CreateWallet />} />
           <Route path='/check-balance' element={<CheckBalance />} />
           <Route path='/escrow' element={<Escrow />} />
+          <Route path='/organisations' element={<OrganisationList />} />
           {/* Add more routes as needed */}
         </Routes>
       </Router>

@@ -22,6 +22,7 @@ const Navbar = () => {
                     <ul className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
                         <li onClick={redirectPage}><a><Link to="/create-wallet">Create Wallet</Link></a></li>
                         <li onClick={redirectPage}><a><Link to="/escrow">Send Currency</Link></a></li>
+                        <li onClick={redirectPage}><a><Link to="/organisations">Organisations List</Link></a></li>
                     </ul>
                 </div>
             </div>
