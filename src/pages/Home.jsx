@@ -5,9 +5,10 @@ import viteLogo from '../assets/vite.svg';
 import '../App.css';
 
 const Home = () => {
+    const [count, setCount] = useState(0);
     return (
         <div>
-            <div class = "flex justify-center">
+            <div className = "flex justify-center">
                 <a href="https://vite.dev" target="_blank">
                     <img src={viteLogo} className="logo" alt="Vite logo" />
                 </a>
@@ -15,9 +16,9 @@ const Home = () => {
                     <img src={reactLogo} className="logo react" alt="React logo" />
                 </a>
             </div>
-            <h1 class = "flex justify-center">Vite + React</h1>
+            <h1 className = "flex justify-center">Vite + React</h1>
             <div className="card">
-                <button class="btn flex justify-center" onClick={() => setCount((count) => count + 1)}>
+                <button className = "btn flex justify-center" onClick={() => setCount((count) => count + 1)}>
                 count is {count}
                 </button>
                 <p>

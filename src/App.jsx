@@ -1,14 +1,13 @@
-import './App.css'
-import { NavBar } from "./components"
+import Navbar from "./components/Navbar.jsx";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import { Wallet } from 'pages/wallet';
-import { Home } from 'pages/home';
+import Wallet from './pages/Wallet';
+import Home from './pages/Home';
 
 function App() {
   return (
     <>
       <Router>
-        <NavBar />
+        <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/wallet' element={<Wallet />} />

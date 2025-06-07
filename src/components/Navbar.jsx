@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {menu, close, logo} from "../assets";
 import {Link} from 'react-router-dom';
 
 const Navbar = () => {
