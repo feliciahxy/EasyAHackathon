@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import WalletCreator from '../components/WalletCreator';
 
 function CreateWallet() {
   const [wallet, setWallet] = useState(null);
@@ -25,25 +26,7 @@ function CreateWallet() {
         <div className="card-body">
           <h2 className="card-title">Create XRPL Wallet</h2>
           <p>Placeholder Subtext</p>
-          <button onClick={handleCreateWallet} disabled={loading}>
-            {loading ? 'Creating Wallet...' : 'Create Wallet'}
-          </button>
-
-          {wallet && (
-            <div style={{ marginTop: '1.5rem' }}>
-              <p><strong>Wallet Address:</strong></p>
-              <code>{wallet.address}</code>
-
-              <p><strong>Wallet Secret (Seed):</strong></p>
-              <code>{wallet.seed}</code>
-
-              <p><strong>Funded Balance:</strong> {wallet.balance} XRP</p>
-
-              <div style={{ marginTop: '0.5rem', color: 'red' }}>
-                ⚠️ Do not share your wallet seed with anyone.
-              </div>
-            </div>
-          )}
+          <WalletCreator />
         </div>
       </div>
     </div>

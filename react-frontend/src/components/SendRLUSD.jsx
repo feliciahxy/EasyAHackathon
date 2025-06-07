@@ -37,7 +37,6 @@ export default function SendRLUSD() {
   
     return (
       <div>
-        <h2>Send RLUSD Tokens</h2>
         <form onSubmit={handleSubmit}>
           <label>
             Recipient Address:

@@ -13,18 +13,9 @@ const JC = () => {
   return (
     <div style={{ padding: 20, paddingTop: 96 }}>
       <h1>Decentralized Aid Disbursement MVP</h1>
-      <WalletCreator onWalletCreated={setWallet} />
-      <hr />
       <FundWallet />
       <hr />
       <SendRLUSD wallet={wallet} /> {/* Pass wallet here */}
-      <hr />
-      <header className="app-header">
-        <h1>XRPL Wallet Balances</h1>
-      </header>
-      <main className="app-content">
-        <BalanceChecker />
-      </main>
       <hr />
       <TrustlineCreator issuer={ISSUER_ADDRESS} />
     </div>
