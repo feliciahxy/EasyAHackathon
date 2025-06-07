@@ -1,6 +1,5 @@
 import Navbar from "./components/Navbar.jsx";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Wallet from './pages/Wallet';
 import Home from './pages/Home';
 import CreateWallet from './pages/CreateWallet';
 import CheckBalance from "./pages/CheckBalance.jsx";
@@ -13,7 +12,6 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/wallet' element={<Wallet />} />
           <Route path='/create-wallet' element={<CreateWallet />} />
           <Route path='/check-balance' element={<CheckBalance />} />
           <Route path='/escrow' element={<Escrow />} />

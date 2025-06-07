@@ -21,7 +21,7 @@ const Navbar = () => {
             </div>
             <div className="flex-none">
                 <div>
-                    <Link to="/wallet"><img src={wallet} alt='wallet' className='w-[50px] h-[50px]' /></Link>
+                    <Link to="/check-balance"><img src={wallet} alt='wallet' className='w-[50px] h-[50px]' /></Link>
                 </div>
             </div>
         </div>
