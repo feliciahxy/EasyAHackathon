@@ -2,16 +2,26 @@ require('dotenv').config();
 const xrpl = require('xrpl');
 
 const client = new xrpl.Client(process.env.XRPL_SERVER);
-const wallet = xrpl.Wallet.fromSeed(process.env.XRPL_SEED);
 
+// Lazy connect
 async function connectClient() {
   if (!client.isConnected()) {
     await client.connect();
   }
 }
 
+// ✅ runtime-safe wallet loader
+function getWallet() {
+  const seed = process.env.XRPL_SEED;
+  if (!seed || typeof seed !== 'string') {
+    throw new Error("XRPL_SEED is missing or invalid in .env");
+  }
+  return xrpl.Wallet.fromSeed(seed);
+}
+
 async function getBalance() {
   await connectClient();
+  const wallet = getWallet();
   const response = await client.request({
     command: 'account_info',
     account: wallet.address,
@@ -23,6 +33,7 @@ async function getBalance() {
 
 async function sendXRP(destination, amountXRP) {
   await connectClient();
+  const wallet = getWallet();
   const tx = {
     TransactionType: 'Payment',
     Account: wallet.address,
@@ -36,4 +47,5 @@ async function sendXRP(destination, amountXRP) {
   return result.result;
 }
 
-module.exports = { getBalance, sendXRP, wallet };
+// Optional: export getWallet if needed elsewhere
+module.exports = { getBalance, sendXRP, getWallet };
