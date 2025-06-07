@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 
 function Escrow() {
-  const [destination, setDestination] = useState('');
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const address = params.get('address') || '';
+
+  const [destination, setDestination] = useState(address);
   const [amount, setAmount] = useState('');
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');

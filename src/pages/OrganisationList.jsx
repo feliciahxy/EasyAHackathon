@@ -11,10 +11,10 @@ function OrganisationList() {
                 alt="Shoes" />
             </figure>
             <div className="card-body">
-                <h2 className="card-title">Organisation Name</h2>
+                <h2 className="card-title">Organisation #1 Name</h2>
                 <p>Organisation Description</p>
                 <div className="card-actions justify-end">
-                <button className="btn btn-primary"><Link to="/escrow">Donate Now</Link></button>
+                <button className="btn btn-primary"><Link to={`/escrow?address=${encodeURIComponent('jiangzongzhe')}`}>Donate Now</Link></button>
                 </div>
             </div>
             </div>
@@ -25,10 +25,10 @@ function OrganisationList() {
                 alt="Shoes" />
             </figure>
             <div className="card-body">
-                <h2 className="card-title">Organisation Name</h2>
+                <h2 className="card-title">Organisation #2 Name</h2>
                 <p>Organisation Description</p>
                 <div className="card-actions justify-end">
-                <button className="btn btn-primary"><Link to="/escrow">Donate Now</Link></button>
+                <button className="btn btn-primary"><Link to={`/escrow?address=${encodeURIComponent('chewjincheng')}`}>Donate Now</Link></button>
                 </div>
             </div>
             </div>
@@ -39,10 +39,10 @@ function OrganisationList() {
                 alt="Shoes" />
             </figure>
             <div className="card-body">
-                <h2 className="card-title">Organisation Name</h2>
+                <h2 className="card-title">Organisation #3 Name</h2>
                 <p>Organisation Description</p>
                 <div className="card-actions justify-end">
-                <button className="btn btn-primary"><Link to="/escrow">Donate Now</Link></button>
+                <button className="btn btn-primary"><Link to={`/escrow?address=${encodeURIComponent('hengxinyufelicia')}`}>Donate Now</Link></button>
                 </div>
             </div>
             </div>
