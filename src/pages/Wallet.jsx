@@ -10,14 +10,14 @@ const Wallet = () => {
         <h1 className="text-3xl font-bold underline text-center mt-10"> 
             Welcome to EasyAHackathon!
         </h1>
-        <div className="flex justify-center mt-10">
+        {/* <div className="flex justify-center mt-10">
             <a href="https://vite.dev" target="_blank">
                 <img src={viteLogo} className="logo" alt="Vite logo" />
             </a>
             <a href="https://react.dev" target="_blank">
                 <img src={reactLogo} className="logo react" alt="React logo" />
             </a>
-        </div>
+        </div> */}
         <div className="card">
             <button className="btn flex justify-center" onClick={() => setCount((count) => count + 1)}>
                 count is {count}
