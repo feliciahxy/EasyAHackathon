@@ -15,6 +15,7 @@ from xrpl.models.transactions import Payment, TrustSet
 from xrpl.transaction import submit_and_wait
 from xrpl.models.amounts import IssuedCurrencyAmount
 from xrpl.models.requests import AccountLines
+from xrpl.models.transactions import TrustSetFlag
 
 
 import requests
@@ -36,6 +37,19 @@ ESCROWS_FILE = "escrows.json"
 ISSUER_ADDRESS = "rEBQEFvhgZKEbUMSFcwe5SM7FyEDN26zRL"
 ISSUER_SEED = "sEd7puA5JQz7znDjUHPZMLVJhzv8pen"  
 
+def allow_rippling(wallet, peer_address):
+    trust_set = TrustSet(
+        account=wallet.classic_address,
+        limit_amount=IssuedCurrencyAmount(
+            currency="USD",
+            issuer=peer_address,
+            value="1000000"
+        ),
+        flags=TrustSetFlag.TF_CLEAR_NO_RIPPLE
+    )
+    return submit_and_wait(trust_set, CLIENT, wallet)
+
+
 @app.route("/create_trustline", methods=["POST"])
 def create_trustline():
     data = request.json
@@ -51,23 +65,21 @@ def create_trustline():
     trust_set = TrustSet(
         account=address,
         limit_amount={
-            "currency": "USD",    # Your token currency
+            "currency": "USD",
             "issuer": issuer,
-            "value": "1000000"      # Trust limit, adjust as needed
+            "value": "1000000"
         }
     )
 
     try:
         response = submit_and_wait(trust_set, CLIENT, wallet)
+        allow_rippling(wallet, issuer)
         return jsonify({"result": response.result})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
 @app.route("/send_rlusd", methods=["POST"])
 def send_rlusd():
-    from xrpl.transaction import submit_and_wait
-    from xrpl.utils import xrp_to_drops
-
     data = request.json
     destination = data.get("destination")
     amount = data.get("amount")
@@ -78,27 +90,17 @@ def send_rlusd():
     issuer_wallet = Wallet.from_seed(ISSUER_SEED)
 
     try:
-        # ✅ Fix: Define issuer wallet
-        issuer_wallet = Wallet.from_seed(ISSUER_SEED)
-
-        # Create Payment transaction
-        amount = IssuedCurrencyAmount(
-            currency="USD",
-            issuer=issuer_wallet.classic_address,
-            value=str(amount)
-        )
-
         payment = Payment(
             account=issuer_wallet.classic_address,
             destination=destination,
-            amount=amount,
-            fee="10"
+            amount=IssuedCurrencyAmount(
+                currency="USD",
+                issuer=issuer_wallet.classic_address,
+                value=str(amount)
+            )
         )
-
-
-        # Sign and submit
         response = submit_and_wait(payment, CLIENT, issuer_wallet)
-
+        allow_rippling(issuer_wallet, destination)
         return jsonify({
             "success": True,
             "tx_hash": response.result["hash"],
@@ -109,18 +111,6 @@ def send_rlusd():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Load wallets from disk using Wallet.from_seed
-if os.path.exists(WALLETS_FILE):
-    with open(WALLETS_FILE, "r") as f:
-        WALLETS_DATA = json.load(f)
-        for addr, data in WALLETS_DATA.items():
-            # Restore wallet from seed properly
-            WALLETS[addr] = Wallet.from_seed(data["seed"])
-
-# Load escrows from disk (simple dict)
-if os.path.exists(ESCROWS_FILE):
-    with open(ESCROWS_FILE, "r") as f:
-        ESCROWS = json.load(f)
 
 def save_wallets():
     with open(WALLETS_FILE, "w") as f:
@@ -292,6 +282,55 @@ def api_claim_funds():
 
     finish_result = finish_escrow(claimer_wallet, escrow_info["owner"], int(escrow_seq))
     return jsonify({"result": finish_result.result})
+
+@app.route("/transfer_rlusd", methods=["POST"])
+def transfer_rlusd():
+    from xrpl.wallet import Wallet
+    from xrpl.models.transactions import Payment
+    from xrpl.transaction import submit_and_wait
+    from xrpl.models.amounts import IssuedCurrencyAmount
+
+    data = request.json
+    sender_seed = data.get("sender_seed")
+    receiver_address = data.get("receiver_address")
+    amount = data.get("amount")
+
+    if not sender_seed or not receiver_address or not amount:
+        return jsonify({"success": False, "error": "Missing required fields"}), 400
+
+    try:
+        sender_wallet = Wallet.from_seed(sender_seed)
+
+        # 👇 Enable rippling for sender if not already
+        issuer_wallet = Wallet.from_seed(ISSUER_SEED)
+        allow_rippling(issuer_wallet, sender_wallet.classic_address)
+
+        # Create RLUSD IOU
+        iou_amount = IssuedCurrencyAmount(
+            currency="USD",
+            issuer=ISSUER_ADDRESS,
+            value=str(amount)
+        )
+
+        payment = Payment(
+            account=sender_wallet.classic_address,
+            destination=receiver_address,
+            amount=iou_amount,
+            send_max=iou_amount
+        )
+
+        response = submit_and_wait(payment, CLIENT, sender_wallet)
+
+        return jsonify({
+            "success": True,
+            "result": response.result
+        })
+
+    except Exception as e:
+        print(f"[transfer_rlusd] Error: {e}")
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
 
 @app.route("/dev")
 def dev_dashboard():
