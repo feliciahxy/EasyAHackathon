@@ -14,11 +14,14 @@ from xrpl.models.requests import AccountInfo
 from xrpl.models.transactions import Payment, TrustSet
 from xrpl.transaction import submit_and_wait
 from xrpl.models.amounts import IssuedCurrencyAmount
+from xrpl.models.requests import AccountLines
+
 
 import requests
 import os
 import json
 
+RLUSD_ISSUER = "rEBQEFvhgZKEbUMSFcwe5SM7FyEDN26zRL"
 CLIENT = JsonRpcClient("https://s.altnet.rippletest.net:51234")
 app = Flask(__name__)
 CORS(app)
