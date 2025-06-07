@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import menu from "../assets";
+import {menu} from "../assets";
 
 const Navbar = () => {
     const [toggle, setToggle] = useState(true);
@@ -12,9 +12,9 @@ const Navbar = () => {
     return (
         <div className="navbar w-full h-[80px] bg-base-100 shadow-sm">
         <div className="flex-none">
-            <button className="btn btn-square btn-ghost">
-                <Link to="/"><img src={menu} alt='menu' className='w-[50px] h-[50px]' /></Link>
-            </button>
+            <div onClick={handleClick}>
+                <img src={!toggle?menu:close} alt='menu' className='w-[30px] h-[30px]' />
+            </div>
         </div>
         <div className="flex-1">
             <a className="btn btn-ghost text-xl">daisyUI</a>
