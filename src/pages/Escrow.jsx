@@ -27,40 +27,44 @@ function Escrow() {
   };
 
   return (
-    <div className="w-screen" style={{ padding: '1rem' }}>
-      <h2 className="justify-center">Send RLUSD to Escrow</h2>
+    <div className="flex items-center justify-center w-screen">
+      <div className="card w-96 bg-base-100 card-xl shadow-lg">
+        <div className="card-body">
+          <h2 className="card-title">Send RLUSD to Escrow</h2>
 
-      <label>Destination Address:</label>
-      <input
-        type="text"
-        value={destination}
-        onChange={(e) => setDestination(e.target.value)}
-        placeholder="Receiver's XRPL Address"
-        style={{ width: '100%', marginBottom: '1rem' }}
-      />
+          <label>Destination Address:</label>
+          <input
+            type="text"
+            value={destination}
+            onChange={(e) => setDestination(e.target.value)}
+            placeholder="Receiver's XRPL Address"
+            style={{ width: '100%', marginBottom: '1rem' }}
+          />
 
-      <label>Amount (RLUSD):</label>
-      <input
-        type="number"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-        placeholder="Amount to escrow"
-        style={{ width: '100%', marginBottom: '1rem' }}
-      />
+          <label>Amount (RLUSD):</label>
+          <input
+            type="number"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            placeholder="Amount to Send"
+            style={{ width: '100%', marginBottom: '1rem' }}
+          />
 
-      <button onClick={handleEscrow}>Send to Escrow</button>
+          <button onClick={handleEscrow}>Send to Escrow</button>
 
-      {result && (
-        <div style={{ marginTop: '1rem', color: 'green' }}>
-          ✅ Escrowed successfully. TX hash: {result.tx_json.hash}
+          {result && (
+            <div style={{ marginTop: '1rem', color: 'green' }}>
+              ✅ Escrowed successfully. TX hash: {result.tx_json.hash}
+            </div>
+          )}
+
+          {error && (
+            <div style={{ marginTop: '1rem', color: 'red' }}>
+              ❌ {error}
+            </div>
+          )}
         </div>
-      )}
-
-      {error && (
-        <div style={{ marginTop: '1rem', color: 'red' }}>
-          ❌ {error}
-        </div>
-      )}
+      </div>
     </div>
   );
 }
