@@ -40,30 +40,34 @@ function CheckBalance() {
   };
 
   return (
-    <div style={{ padding: '1.5rem', maxWidth: '500px' }}>
-      <h2>Check XRPL Wallet Balance</h2>
-      <input
-        type="text"
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-        placeholder="Enter wallet address"
-        style={{ width: '100%', padding: '0.5rem', marginBottom: '1rem' }}
-      />
-      <button onClick={handleCheckBalance} disabled={loading}>
-        {loading ? 'Checking...' : 'Check Balance'}
-      </button>
+    <div className="flex items-center justify-center w-screen">
+      <div className="card w-96 bg-base-100 card-xl shadow-lg">
+        <div className="card-body">
+          <h2 className="card-title">Check XRPL Wallet Balance</h2>
+          <input
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            placeholder="Enter wallet address"
+            style={{ width: '100%', padding: '0.5rem', marginBottom: '1rem' }}
+          />
+          <button onClick={handleCheckBalance} disabled={loading}>
+            {loading ? 'Checking...' : 'Check Balance'}
+          </button>
 
-      {balance !== null && (
-        <div style={{ marginTop: '1rem' }}>
-          <strong>Balance:</strong> {balance} XRP
-        </div>
-      )}
+          {balance !== null && (
+            <div style={{ marginTop: '1rem' }}>
+              <strong>Balance:</strong> {balance} XRP
+            </div>
+          )}
 
-      {error && (
-        <div style={{ marginTop: '1rem', color: 'red' }}>
-          ⚠️ {error}
+          {error && (
+            <div style={{ marginTop: '1rem', color: 'red' }}>
+              ⚠️ {error}
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
