@@ -1,18 +1,22 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const { getBalance, sendXRP, wallet } = require('./services/xrplService');
+const { getBalance, sendXRP, wallet } = require('../services/xrplService');
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: frontendUrl
+}));
 app.use(express.json());
+
+const frontendUrl = process.env.VITE_FRONTEND_URL || 'http://localhost:5173';
 
 
 
 // Mount routes from /routes folder
-const xrplRoutes = require('./routes/xrplRoutes');
+const xrplRoutes = require('../routes/xrplRoutes');
 app.use('/api', xrplRoutes);
 
-const escrowRoutes = require('./routes/escrowRoutes');
+const escrowRoutes = require('../routes/escrowRoutes');
 app.use('/api/escrow', escrowRoutes);
 
 // (optional) Keep balance/send here if not modularized
@@ -37,7 +41,9 @@ app.post('/api/send', async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`🚀 XRPL Backend running on port ${process.env.PORT}`);
-});
+export default app;
+
+// app.listen(process.env.PORT, () => {
+//   console.log(`🚀 XRPL Backend running on port ${process.env.PORT}`);
+// });
 
