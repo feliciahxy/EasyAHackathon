@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const { getBalance, sendXRP, wallet } = require('./xrplService');
+const { getBalance, sendXRP, wallet } = require('./services/xrplService');
 const cors = require('cors');
 app.use(cors());
 
