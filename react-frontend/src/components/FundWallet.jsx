@@ -44,22 +44,26 @@ export default function FundWallet() {
   
 
   return (
-    <div style={{ maxWidth: "500px", margin: "1rem auto", fontFamily: "Arial" }}>
-      <h2>Fund Wallet with Test XRP</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Enter wallet address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          style={{ width: "100%", padding: "8px", fontSize: "1rem" }}
-          disabled={loading}
-        />
-        <button type="submit" disabled={loading} style={{ marginTop: "10px", padding: "8px 16px" }}>
-          {loading ? "Requesting..." : "Request Test XRP"}
-        </button>
-      </form>
-      {message && <p style={{ marginTop: "10px" }}>{message}</p>}
+    <div className="flex items-center justify-center w-screen">
+      <div className="card w-96 bg-base-100 card-xl shadow-lg">
+        <div className="card-body">
+          <h2 className="card-title">Fund Wallet with Test XRP</h2>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="Enter wallet address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              style={{ width: "100%", padding: "8px", fontSize: "1rem" }}
+              disabled={loading}
+            />
+            <button type="submit" disabled={loading} style={{ marginTop: "10px", padding: "8px 16px" }}>
+              {loading ? "Requesting..." : "Request Test XRP"}
+            </button>
+          </form>
+          {message && <p style={{ marginTop: "10px" }}>{message}</p>}
+        </div>
+      </div>
     </div>
   );
 }
