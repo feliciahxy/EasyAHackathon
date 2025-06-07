@@ -1,8 +1,8 @@
-import SendRLUSD from "../components/SendRLUSD";
+import TransferRLUSD from "../components/TransferRLUSD";
 
 function TransferMoney() {
   return (
-    <SendRLUSD />
+    <TransferRLUSD />
   );
 }
 export default TransferMoney;
