@@ -7,7 +7,7 @@ import CheckBalance from "./pages/CheckBalance.jsx";
 import Escrow from "./pages/Escrow.jsx";
 import OrganisationList from "./pages/OrganisationList.jsx";
 import CreateTrustline from "./pages/CreateTrustline.jsx";
-import FundWallet from "./components/FundWallet.jsx";
+import FundWallet from "./pages/FundWallet.jsx";
 import TransferMoney from "./pages/TransferMoney.jsx";
 
 function App() {

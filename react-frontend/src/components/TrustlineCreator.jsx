@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+const issuer = import.meta.env.VITE_ISSUER_ADDRESS;
+
 const TrustlineCreator = ({ issuer }) => {
   const [address, setAddress] = useState("");
   const [secret, setSecret] = useState("");

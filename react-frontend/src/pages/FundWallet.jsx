@@ -4,7 +4,7 @@ import SendRLUSD from "../components/SendRLUSD";
 
 const ISSUER_ADDRESS = "rEBQEFvhgZKEbUMSFcwe5SM7FyEDN26zRL";
 
-const FundWallet = () => {
+const handleFundWallet = () => {
   const [wallet, setWallet] = useState(null);
 
   return (

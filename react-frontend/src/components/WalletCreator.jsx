@@ -32,7 +32,6 @@ export default function WalletCreator({ onWalletCreated }) {
     try {
       const newWallet = await timeoutPromise(150000, createWallet());
       setWallet(newWallet);
-      onWalletCreated(newWallet);
     } catch (err) {
       setError(err.message || "Failed to create wallet");
     } finally {
