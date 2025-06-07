@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import { menu } from "../assets";
+import menu from "../assets";
 
 const Navbar = () => {
     const [toggle, setToggle] = useState(true);
