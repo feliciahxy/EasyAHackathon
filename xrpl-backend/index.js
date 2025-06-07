@@ -15,6 +15,10 @@ app.use('/api', xrplRoutes);
 const escrowRoutes = require('./routes/escrowRoutes');
 app.use('/api/escrow', escrowRoutes);
 
+const trustlineRoutes = require('./routes/trustlineRoutes');
+app.use('/api/trustline', trustlineRoutes);
+
+
 // (optional) Keep balance/send here if not modularized
 app.get('/api/balance', async (req, res) => {
   try {
