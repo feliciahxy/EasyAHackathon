@@ -14,7 +14,7 @@ export default function FundWallet() {
     setLoading(true);
     setMessage("Sending request...");
     try {
-      const response = await fetch("http://localhost:8000/fund_wallet", {
+      const response = await fetch("http://127.0.0.1:8000/fund_wallet", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ address }),
